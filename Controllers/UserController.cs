@@ -12,9 +12,10 @@ using System.Web.Http.Results;
 
 namespace server.Controllers
 {
+    [RoutePrefix("api/User")]
     public class UserController : ApiController //UserController - название файла UserController //RegistrationController - название файла RegistrationController
     {
-        SqlConnection _connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connection"].ConnectionString);
+        SqlConnection _connection = new SqlConnection("Data Source=DESKTOP-2ARAE3C;Initial Catalog=physics_db;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True"); //ConfigurationManager.ConnectionStrings["connection"].ConnectionString
         SqlCommand _command = null;
         SqlDataAdapter _adapter = null;
 
@@ -66,7 +67,7 @@ namespace server.Controllers
                 _adapter.Fill(dt);
                 if (dt.Rows.Count > 0)
                 {
-                    result = "Добро пожаловать";
+                    result = "Пользователь авторизован";
                 }
                 else
                 {
