@@ -51,7 +51,7 @@ namespace server.Controllers
             return result;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Authorization")]
 
         public string Authorization(User user)
@@ -65,7 +65,7 @@ namespace server.Controllers
                 _adapter.SelectCommand.Parameters.AddWithValue("@UserPassword", user.UserPassword);
                 DataTable dt = new DataTable();
                 _adapter.Fill(dt);
-                if (dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0 && !dt.Rows.Equals(""))
                 {
                     result = "Пользователь авторизован";
                 }
