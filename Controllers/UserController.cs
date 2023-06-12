@@ -13,7 +13,7 @@ using System.Web.Http.Results;
 namespace server.Controllers
 {
     [RoutePrefix("api/User")]
-    public class UserController : ApiController //UserController - название файла UserController //RegistrationController - название файла RegistrationController
+    public class UserController : ApiController
     {
         SqlConnection _connection = new SqlConnection("Data Source=DESKTOP-2ARAE3C;Initial Catalog=physics_db;Integrated Security=True;Trusted_Connection=True;TrustServerCertificate=True"); //ConfigurationManager.ConnectionStrings["connection"].ConnectionString
         SqlCommand _command = null;
@@ -51,7 +51,7 @@ namespace server.Controllers
             return result;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Authorization")]
 
         public string Authorization(User user)
@@ -65,7 +65,7 @@ namespace server.Controllers
                 _adapter.SelectCommand.Parameters.AddWithValue("@UserPassword", user.UserPassword);
                 DataTable dt = new DataTable();
                 _adapter.Fill(dt);
-                if (dt.Rows.Count > 0)
+                if (dt.Rows.Count > 0 && !dt.Rows.Equals(""))
                 {
                     result = "Пользователь авторизован";
                 }
